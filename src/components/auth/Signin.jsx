@@ -64,6 +64,9 @@ const Signin = () => {
       <div>
         New User? <Link to={"/signup"}>Signup</Link>
       </div>
+      <div>
+        Forgot password? <Link to={"/reset-password"}>Click here</Link>
+      </div>
     </>
   );
 };
