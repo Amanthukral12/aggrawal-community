@@ -1,5 +1,9 @@
+import { UserAuth } from "../../contexts/AuthProvider";
+
 const Home = () => {
-  return <div>Home</div>;
+  const { user } = UserAuth();
+
+  return <div>Welcome {user.email}</div>;
 };
 
 export default Home;

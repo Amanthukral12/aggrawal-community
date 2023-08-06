@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import supabase from "../../supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../../contexts/AuthProvider";
 
 const Signup = () => {
   const emailRef = useRef(null);
@@ -10,6 +10,8 @@ const Signup = () => {
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const { signup } = UserAuth();
 
   const handleErrorMessage = () => {
     setTimeout(function () {
@@ -42,15 +44,12 @@ const Signup = () => {
       setLoading(true);
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await signup(email, password);
 
       if (!error && data) {
-        setMsg(
-          "Registration Successful. Check your email to confirm your account"
-        );
+        setMsg("Registration Successful. Redirecting to login page");
       }
     } catch (error) {
-      console.log(error);
       setErrorMsg("Error in creating Account");
     }
     setLoading(false);
