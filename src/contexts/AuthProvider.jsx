@@ -12,6 +12,10 @@ const login = (email, password) => {
   return supabase.auth.signInWithPassword({ email, password });
 };
 
+const logout = () => {
+  return supabase.auth.signOut();
+};
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -21,6 +25,9 @@ const AuthProvider = ({ children }) => {
       if (e === "SIGNED_IN") {
         setUser(session.user);
         setAuth(true);
+      } else if (e === "SIGNED_OUT") {
+        setUser(null);
+        setAuth(false);
       }
     });
     return () => {
@@ -29,7 +36,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, signup }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, auth }}>
       {children}
     </AuthContext.Provider>
   );
