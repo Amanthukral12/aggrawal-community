@@ -5,9 +5,7 @@ import { UserAuth } from "../../contexts/AuthProvider";
 const Signin = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
   const [errorMsg, setErrorMsg] = useState("");
-
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = UserAuth();

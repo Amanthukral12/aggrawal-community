@@ -3,6 +3,7 @@ import { UserAuth } from "../contexts/AuthProvider";
 
 const ProtectedRoute = () => {
   const { user } = UserAuth();
+
   const location = useLocation();
   return user ? (
     <Outlet />

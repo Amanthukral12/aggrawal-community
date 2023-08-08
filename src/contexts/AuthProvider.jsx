@@ -27,19 +27,31 @@ const updatePassword = (updatedPassword) => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange(async (e, session) => {
-      console.log(e);
-      if (e === "SIGNED_IN") {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
+    setLoading(true);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    if (user) {
+      setUser(user);
+    }
+    setLoading(false);
+
+    const { data } = supabase.auth.onAuthStateChange((e, session) => {
+      if (e == "SIGNED_IN") {
         setUser(session.user);
         setAuth(true);
-      } else if (e === "SIGNED_OUT") {
+      } else if (e == "SIGNED_OUT") {
         setUser(null);
         setAuth(false);
-      } else if (e === "PASSWORD_RECOVERY") {
+      } else if (e == "PASSWORD_RECOVERY") {
         setAuth(false);
         setUser(null);
       }
@@ -61,7 +73,7 @@ const AuthProvider = ({ children }) => {
         updatePassword,
       }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
