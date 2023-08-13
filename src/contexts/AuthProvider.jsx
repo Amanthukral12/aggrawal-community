@@ -29,51 +29,56 @@ const updatePassword = (updatedPassword) => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(null);
+
+  const [session, setSession] = useState(
+    JSON.parse(sessionStorage.getItem("session"))
+  );
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+    setSession(JSON.parse(sessionStorage.getItem("session")));
+  }, []);
 
   useEffect(() => {
-    setLoading(true);
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
-    if (user) {
-      setUser(user);
-    }
-    setLoading(false);
+    sessionStorage.setItem("session", JSON.stringify(session));
+  }, [session]);
 
-    const { data } = supabase.auth.onAuthStateChange((e, session) => {
-      if (e == "SIGNED_IN") {
-        setUser(session.user);
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((e, _session) => {
+      if (e === "SIGNED_IN") {
         setAuth(true);
+        setSession(_session);
+        setUser(_session.user);
       } else if (e == "SIGNED_OUT") {
+        setSession(null);
         setUser(null);
         setAuth(false);
       } else if (e == "PASSWORD_RECOVERY") {
+        setSession(null);
         setAuth(false);
         setUser(null);
       }
     });
+
     return () => {
       data.subscription.unsubscribe();
     };
-  }, []);
+  }, [session]);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        auth,
         login,
         signup,
         logout,
-        auth,
+
         passwordReset,
         updatePassword,
+        session,
+        user,
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
