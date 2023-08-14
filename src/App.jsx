@@ -7,15 +7,19 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PasswordReset from "./components/auth/PasswordReset";
 import UpdatePassword from "./components/auth/UpdatePassword";
 import Account from "./components/profile/Account";
+import MembersList from "./components/members/MembersList";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   return (
     <>
       <div>
+        <Navbar />
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/update-profile" element={<Account />} />
+            <Route path="/members" element={<MembersList />} />
           </Route>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />

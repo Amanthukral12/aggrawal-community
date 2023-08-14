@@ -8,9 +8,6 @@ const Home = () => {
 
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
       <span>Welcome {currentProfile.first_name}</span>
       <Link to={"/update-profile"}>Update Profile</Link>
     </div>

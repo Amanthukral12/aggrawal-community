@@ -70,6 +70,7 @@ const Account = () => {
       profile_photo: fileURL,
       age,
       gender,
+      email: session.user.email,
     };
 
     let { error } = await supabase.from("profiles").upsert(updates);

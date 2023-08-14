@@ -7,6 +7,16 @@ supabase;
 
 const ProfileContext = createContext();
 
+const getAllProfiles = async () => {
+  const { data, error } = await supabase.from("profiles").select("*");
+
+  if (data) {
+    return data;
+  } else {
+    console.log(error);
+  }
+};
+
 const ProfileProvider = ({ children }) => {
   const { session } = UserAuth();
 
@@ -35,7 +45,7 @@ const ProfileProvider = ({ children }) => {
 
   return (
     <ProfileContext.Provider
-      value={{ getProfile, currentProfile, setCurrentProfile }}
+      value={{ getProfile, currentProfile, setCurrentProfile, getAllProfiles }}
     >
       {children}
     </ProfileContext.Provider>
