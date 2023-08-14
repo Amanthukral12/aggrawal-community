@@ -6,6 +6,7 @@ import Home from "./components/dashboard/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PasswordReset from "./components/auth/PasswordReset";
 import UpdatePassword from "./components/auth/UpdatePassword";
+import Account from "./components/profile/Account";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
+            <Route path="/update-profile" element={<Account />} />
           </Route>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />

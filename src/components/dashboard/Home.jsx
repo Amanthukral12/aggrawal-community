@@ -1,15 +1,18 @@
-import { UserAuth } from "../../contexts/AuthProvider";
+import { Link } from "react-router-dom";
+
 import Navbar from "../navbar/Navbar";
+import { UseProfile } from "../../contexts/ProfileContext";
 
 const Home = () => {
-  const { user } = UserAuth();
+  const { currentProfile } = UseProfile();
 
   return (
     <div>
       <div>
         <Navbar />
       </div>
-      <span>Welcome {user.email}</span>
+      <span>Welcome {currentProfile.first_name}</span>
+      <Link to={"/update-profile"}>Update Profile</Link>
     </div>
   );
 };
