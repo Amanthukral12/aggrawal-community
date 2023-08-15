@@ -26,7 +26,7 @@ const ProfileProvider = ({ children }) => {
     const { data, error } = await supabase
       .from("profiles")
       .select(
-        "first_name, last_name, phone_number, address, profile_photo, age, gender, id"
+        "first_name, last_name, phone_number, address, profile_photo, age, gender, id, email"
       )
       .eq("id", session.user.id)
       .single();

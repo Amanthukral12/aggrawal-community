@@ -9,6 +9,7 @@ import UpdatePassword from "./components/auth/UpdatePassword";
 import Account from "./components/profile/Account";
 import MembersList from "./components/members/MembersList";
 import Navbar from "./components/navbar/Navbar";
+import Posts from "./components/posts/Posts";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/update-profile" element={<Account />} />
             <Route path="/members" element={<MembersList />} />
+            <Route path="/posts" element={<Posts />} />
           </Route>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
