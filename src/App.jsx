@@ -15,22 +15,20 @@ import Events from "./components/events/Events";
 function App() {
   return (
     <>
-      <div>
-        <Navbar />
-        <Routes>
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/update-profile" element={<Account />} />
-            <Route path="/members" element={<MembersList />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/events" element={<Events />} />
-          </Route>
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/reset-password" element={<PasswordReset />} />
-          <Route path="/update-password" element={<UpdatePassword />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/update-profile" element={<Account />} />
+          <Route path="/members" element={<MembersList />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/events" element={<Events />} />
+        </Route>
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/reset-password" element={<PasswordReset />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
+      </Routes>
     </>
   );
 }

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { UserAuth } from "../../contexts/AuthProvider";
 import { UseProfile } from "../../contexts/ProfileContext";
-useState;
+import "./styles.css";
+import Modal from "./Modal";
+import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   const { auth, logout } = UserAuth();
   const { currentProfile } = UseProfile();
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -17,14 +21,38 @@ const Navbar = () => {
   };
 
   return (
-    <div>
-      <div>{auth && <button onClick={handleLogout}>Logout</button>}</div>
-      <img
-        src={currentProfile.profile_photo}
-        height="50px"
-        width="50px"
-        alt=""
-      />
+    <div className="navMain">
+      <GiHamburgerMenu className="icon" />
+      <p className="navHeading">Aggrawal Community</p>
+      {auth && (
+        <img
+          src={currentProfile.profile_photo}
+          className="profilePicture"
+          alt=""
+          onClick={() => setShowModal(!showModal)}
+        />
+      )}
+      <Modal
+        shown={showModal}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
+        <p className="userName">
+          {currentProfile.first_name} {currentProfile.last_name}
+        </p>
+
+        <Link
+          to={"/update-profile"}
+          onClick={() => setShowModal(!showModal)}
+          className="updateProfile"
+        >
+          Update Profile
+        </Link>
+        <button className="button" onClick={handleLogout}>
+          Logout
+        </button>
+      </Modal>
     </div>
   );
 };
