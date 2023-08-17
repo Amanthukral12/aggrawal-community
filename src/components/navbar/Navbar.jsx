@@ -5,10 +5,12 @@ import "./styles.css";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Sidebar from "../sidebar/Sidebar";
 const Navbar = () => {
   const { auth, logout } = UserAuth();
   const { currentProfile } = UseProfile();
   const [showModal, setShowModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -22,7 +24,14 @@ const Navbar = () => {
 
   return (
     <div className="navMain">
-      <GiHamburgerMenu className="icon" />
+      <GiHamburgerMenu
+        className="icon"
+        onClick={() => setShowSidebar(!showSidebar)}
+      />
+      <Sidebar
+        shown={showSidebar}
+        close={() => setShowSidebar(!showSidebar)}
+      ></Sidebar>
       <p className="navHeading">Aggrawal Community</p>
       {auth && (
         <img
