@@ -15,11 +15,19 @@ const Sidebar = ({ children, shown, close }) => {
           e.stopPropagation();
         }}
       >
+        {children}
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "active" : "notSelected")}
+          onClick={() => {
+            close();
+          }}
+        >
+          Home
+        </NavLink>
         <NavLink
           to="/members"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
+          className={({ isActive }) => (isActive ? "active" : "notSelected")}
           onClick={() => {
             close();
           }}
@@ -28,9 +36,7 @@ const Sidebar = ({ children, shown, close }) => {
         </NavLink>
         <NavLink
           to="/posts"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
+          className={({ isActive }) => (isActive ? "active" : "notSelected")}
           onClick={() => {
             close();
           }}
@@ -39,16 +45,13 @@ const Sidebar = ({ children, shown, close }) => {
         </NavLink>
         <NavLink
           to="/events"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
+          className={({ isActive }) => (isActive ? "active" : "notSelected")}
           onClick={() => {
             close();
           }}
         >
           Events
         </NavLink>
-        {children}
       </div>
     </div>
   ) : null;

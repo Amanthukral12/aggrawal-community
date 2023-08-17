@@ -28,11 +28,13 @@ const Navbar = () => {
         className="icon"
         onClick={() => setShowSidebar(!showSidebar)}
       />
-      <Sidebar
-        shown={showSidebar}
-        close={() => setShowSidebar(!showSidebar)}
-      ></Sidebar>
-      <p className="navHeading">Aggrawal Community</p>
+      <Sidebar shown={showSidebar} close={() => setShowSidebar(!showSidebar)}>
+        <h3 className="appName">Aggrawal Community</h3>
+        <hr className="horizontalLine" />
+      </Sidebar>
+      <Link to={"/"} className="navHeading">
+        Aggrawal Community
+      </Link>
       {auth && (
         <img
           src={currentProfile.profile_photo}
