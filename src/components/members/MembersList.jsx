@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UseProfile } from "../../contexts/ProfileContext";
 import Member from "./Member";
-
+import "./styles.css";
 const MembersList = () => {
   const { getAllProfiles } = UseProfile();
   const [members, setMembers] = useState([]);
@@ -19,8 +19,8 @@ const MembersList = () => {
   }, []);
 
   return (
-    <div>
-      <div>Members</div>
+    <div className="membersMainDiv">
+      <div className="heading">Members</div>
       {members.map((member) => {
         return <Member key={member.id} member={member}></Member>;
       })}

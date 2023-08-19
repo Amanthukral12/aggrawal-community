@@ -1,19 +1,23 @@
 import propTypes from "prop-types";
+import Fade from "react-reveal/Fade";
+import "./styles.css";
 const Member = ({ member }) => {
   return (
-    <div>
-      <img src={member.profile_photo} width="150px" height="150px" alt="" />
-      <h4>
-        {member.first_name} {member.last_name}
-      </h4>
-      <p>
-        {member.age}, {member.gender}
-      </p>
-      <p>{member.address}</p>
-      <p>
-        {member.phone_number}, {member.email}
-      </p>
-    </div>
+    <Fade bottom>
+      <div className="userSection">
+        <img src={member.profile_photo} className="profilePhoto" alt="" />
+        <h4 className="userName">
+          {member.first_name} {member.last_name}
+        </h4>
+        <p>
+          {member.age}, {member.gender}
+        </p>
+        <p className="address">{member.address}</p>
+        <p>
+          {member.phone_number}, {member.email}
+        </p>
+      </div>
+    </Fade>
   );
 };
 
