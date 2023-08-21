@@ -1,0 +1,95 @@
+.eventsMainDiv {
+    background-color: #283F4D;
+    color: white;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid white;
+}
+
+.eventsHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 16px 5px 16px;
+    color: white;
+}
+
+.photo {
+    height: 100px;
+    width: 100px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.eventDetailsRoot {
+    min-height: 80vh;
+}
+
+.eventsDetails {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1.5rem;
+}
+
+.eventInfo {
+    padding-top: 10px;
+}
+
+.eventName {
+    text-transform: capitalize;
+    padding-bottom: 5px;
+    font-size: 1.25rem
+}
+
+.eventAddress, .eventTime {
+    font-size: 0.75rem;
+    color: rgb(167, 167, 167);
+    text-transform: capitalize;
+    padding-bottom: 5px;
+}
+
+.eventsForm {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #283F4D;
+    padding: 1rem;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.input {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    outline-width: 0;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgb(51, 46, 46);
+}
+
+.fileInput {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    outline-width: 0;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+.submitButton {
+    line-height: 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 15px;
+    background-color: #132D3D;
+    color: white;
+    border: 1px solid white;
+}
+

@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import supabase from "../../supabaseClient";
 import { UseProfile } from "../../contexts/ProfileContext";
 import Event from "./Event";
-
+import "./styles.css";
 const Events = () => {
   const [events, setEvents] = useState(null);
   const [title, setTitle] = useState("");
@@ -24,7 +24,11 @@ const Events = () => {
   }
 
   const fetchEvents = async () => {
-    const { data, error } = await supabase.from("events").select("*");
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .order("date", { ascending: true })
+      .order("time", { ascending: true });
     if (error) {
       setFetchError("Could not fetch posts");
       setEvents(null);
@@ -66,7 +70,7 @@ const Events = () => {
           time: eventTime,
           photo: fileURL,
           userID: currentProfile.id,
-          posted_by: currentProfile.first_name + currentProfile.last_name,
+          posted_by: currentProfile.first_name + " " + currentProfile.last_name,
         },
       ])
       .select();
@@ -78,34 +82,48 @@ const Events = () => {
       setFormError(null);
       setTitle("");
       setAddress("");
-      setEventDate(null);
-      setEventTime(null);
+      setEventDate("");
+      setEventTime("");
     }
     fetchEvents();
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="eventsForm" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Event Name"
+          value={title}
+          className="input"
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
           placeholder="Event Address"
+          value={address}
+          className="input"
           onChange={(e) => setAddress(e.target.value)}
         />
-        <input type="date" onChange={(e) => setEventDate(e.target.value)} />
-        <input type="time" onChange={(e) => setEventTime(e.target.value)} />
-        <input type="file" onChange={handleFileChange} />
-        <button>Submit</button>
+        <input
+          type="date"
+          className="input"
+          onChange={(e) => setEventDate(e.target.value)}
+          value={eventDate}
+        />
+        <input
+          type="time"
+          className="input"
+          onChange={(e) => setEventTime(e.target.value)}
+          value={eventTime}
+        />
+        <input type="file" className="fileInput" onChange={handleFileChange} />
+        <button className="submitButton">Submit</button>
         {formError && <p>{formError}</p>}
       </form>
       {fetchError && <p>{fetchError}</p>}
       {events && (
-        <div>
+        <div className="eventDetailsRoot">
           {events.map((event) => (
             <Event key={event.id} event={event} fetchEvents={fetchEvents} />
           ))}
