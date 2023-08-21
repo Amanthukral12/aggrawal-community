@@ -1,10 +1,16 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import supabase from "../../supabaseClient";
 import { UseProfile } from "../../contexts/ProfileContext";
 import Event from "./Event";
 import "./styles.css";
+
 const Events = () => {
   const [events, setEvents] = useState(null);
   const [title, setTitle] = useState("");
@@ -39,7 +45,48 @@ const Events = () => {
     }
   };
 
+  const deleteCompletedData = async () => {
+    const newDate = new Date();
+    newDate.setDate(newDate.getDate() - 1);
+
+    let yyyy = newDate.getFullYear();
+    let mm = newDate.getMonth() + 1;
+    let dd = newDate.getDate();
+
+    if (dd < 10) dd = "0" + dd;
+    if (mm < 10) mm = "0" + mm;
+
+    const finalDate = yyyy + "-" + mm + "-" + dd;
+
+    const { data } = await supabase
+      .from("events")
+      .select("photo")
+      .eq("date", finalDate)
+      .eq("userID", currentProfile?.id);
+
+    if (data) {
+      data.map(async (d) => {
+        if (d.photo) {
+          let photoURL = d.photo;
+
+          const fileRef = ref(db, photoURL);
+
+          await deleteObject(fileRef);
+        }
+      });
+    }
+
+    const { error } = await supabase
+      .from("events")
+      .delete()
+      .eq("date", finalDate)
+      .eq("userID", currentProfile?.id);
+
+    if (error) console.log(error);
+  };
+
   useEffect(() => {
+    deleteCompletedData();
     fetchEvents();
   }, []);
 

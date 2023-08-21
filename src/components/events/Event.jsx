@@ -5,10 +5,26 @@ import "./styles.css";
 import { MdDelete } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidTime } from "react-icons/bi";
-
+import { db } from "../../firebase";
+import { ref, deleteObject } from "firebase/storage";
+ref;
 const Event = ({ event, fetchEvents }) => {
   const { currentProfile } = UseProfile();
   const deleteEvent = async (id) => {
+    const { data } = await supabase
+      .from("events")
+      .select("photo")
+      .eq("id", id)
+      .eq("userID", currentProfile?.id);
+
+    if (data[0].photo) {
+      const photoURL = data[0].photo;
+
+      const fileRef = ref(db, photoURL);
+
+      await deleteObject(fileRef);
+    }
+
     const { error } = await supabase
       .from("events")
       .delete()
