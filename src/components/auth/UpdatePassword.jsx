@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { UserAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
-
+import "./styles.css";
 const UpdatePassword = () => {
   const { updatePassword } = UserAuth();
   const passwordRef = useRef(null);
@@ -45,15 +45,27 @@ const UpdatePassword = () => {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="password" ref={passwordRef} required />
-          <input type="password" ref={confirmPasswordRef} required />
-          {errorMsg && <div>{errorMsg}</div>}
-          {errorMsg ? handleErrorMessage() : null}
-          <button disabled={loading}>Update Password</button>
-        </form>
-      </div>
+      <form onSubmit={handleSubmit} className="form">
+        <input
+          type="password"
+          ref={passwordRef}
+          placeholder="Enter new passowrd"
+          required
+          className="input"
+        />
+        <input
+          type="password"
+          ref={confirmPasswordRef}
+          required
+          className="input"
+          placeholder="Confirm new password"
+        />
+        {errorMsg && <div className="msg">{errorMsg}</div>}
+        {errorMsg ? handleErrorMessage() : null}
+        <button disabled={loading} className="submitButton">
+          Update Password
+        </button>
+      </form>
     </>
   );
 };

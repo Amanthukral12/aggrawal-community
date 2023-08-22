@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../contexts/AuthProvider";
-
+import "./styles.css";
 const Signup = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -56,30 +56,43 @@ const Signup = () => {
   };
   return (
     <>
-      <h1>Signup</h1>
-      <form onSubmit={handleSignup}>
-        <input type="email" placeholder="Email" ref={emailRef} required />
+      <h1 className="heading">Signup</h1>
+      <form onSubmit={handleSignup} className="form">
+        <input
+          type="email"
+          placeholder="Email"
+          ref={emailRef}
+          required
+          className="input"
+        />
         <input
           type="password"
           placeholder="Password"
           ref={passwordRef}
           required
+          className="input"
         />
         <input
           type="password"
           placeholder="Confirm Password"
           ref={confirmPasswordRef}
           required
+          className="input"
         />
-        {errorMsg && <div>{errorMsg}</div>}
+        {errorMsg && <div className="msg">{errorMsg}</div>}
         {errorMsg ? handleErrorMessage() : null}
 
-        {msg && <div>{msg}</div>}
+        {msg && <div className="msg">{msg}</div>}
         {msg ? handleSuccessMessage() : null}
-        <button disabled={loading}>Signup</button>
+        <button className="submitButton" disabled={loading}>
+          Signup
+        </button>
       </form>
-      <div>
-        Aleady a User? <Link to={"/signin"}>Login</Link>
+      <div className="extra">
+        Aleady a User?{" "}
+        <Link to={"/signin"} className="extra">
+          Login
+        </Link>
       </div>
     </>
   );

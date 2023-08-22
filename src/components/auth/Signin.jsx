@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../contexts/AuthProvider";
-
+import "./styles.css";
 const Signin = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -44,26 +44,41 @@ const Signin = () => {
 
   return (
     <>
-      <h1>Signin</h1>
-      <form onSubmit={handleSignin}>
-        <input type="email" placeholder="Email" ref={emailRef} required />
+      <h1 className="heading">Signin</h1>
+      <form className="form" onSubmit={handleSignin}>
+        <input
+          type="email"
+          placeholder="Email"
+          ref={emailRef}
+          required
+          className="input"
+        />
         <input
           type="password"
           placeholder="Password"
           ref={passwordRef}
           required
+          className="input"
         />
 
-        {errorMsg && <div>{errorMsg}</div>}
+        {errorMsg && <div className="msg">{errorMsg}</div>}
         {errorMsg ? handleErrorMessage() : null}
 
-        <button disabled={loading}>Sign In</button>
+        <button className="submitButton" disabled={loading}>
+          Sign In
+        </button>
       </form>
-      <div>
-        New User? <Link to={"/signup"}>Signup</Link>
+      <div className="extra">
+        New User?{" "}
+        <Link to={"/signup"} className="extra">
+          Signup
+        </Link>
       </div>
-      <div>
-        Forgot password? <Link to={"/reset-password"}>Click here</Link>
+      <div className="extra">
+        Forgot password?{" "}
+        <Link to={"/reset-password"} className="extra">
+          Click here
+        </Link>
       </div>
     </>
   );

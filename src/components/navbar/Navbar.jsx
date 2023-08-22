@@ -24,24 +24,31 @@ const Navbar = () => {
 
   return (
     <div className="navMain">
-      <GiHamburgerMenu
-        className="icon"
-        onClick={() => setShowSidebar(!showSidebar)}
-      />
+      {auth && (
+        <GiHamburgerMenu
+          className="icon"
+          onClick={() => setShowSidebar(!showSidebar)}
+        />
+      )}
       <Sidebar shown={showSidebar} close={() => setShowSidebar(!showSidebar)}>
         <h3 className="appName">Aggrawal Community</h3>
         <hr className="horizontalLine" />
       </Sidebar>
-      <Link to={"/"} className="navHeading">
-        Aggrawal Community
-      </Link>
-      {auth && (
-        <img
-          src={currentProfile.profile_photo}
-          className="profilePicture"
-          alt=""
-          onClick={() => setShowModal(!showModal)}
-        />
+
+      {auth ? (
+        <>
+          <Link to={"/"} className="navHeading">
+            Aggrawal Community
+          </Link>
+          <img
+            src={currentProfile.profile_photo}
+            className="profilePicture"
+            alt=""
+            onClick={() => setShowModal(!showModal)}
+          />
+        </>
+      ) : (
+        <h1 className="navHeading1">Aggrawal Community</h1>
       )}
       <Modal
         shown={showModal}

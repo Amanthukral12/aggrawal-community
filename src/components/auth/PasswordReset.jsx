@@ -1,14 +1,12 @@
 import { useRef, useState } from "react";
-import { UserAuth } from "../../contexts/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import supabase from "../../supabaseClient";
-
+import "./styles.css";
 const PasswordReset = () => {
-  const { passwordReset } = UserAuth();
   const emailRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
+
   const handleSuccessMessage = () => {
     setTimeout(function () {
       setMsg("");
@@ -26,8 +24,6 @@ const PasswordReset = () => {
           redirectTo: "http://localhost:5173/update-password",
         }
       );
-      console.log(error);
-      console.log(data);
       setMsg("Password reset has been sent to you email");
     } catch (error) {
       console.log(error);
@@ -35,18 +31,23 @@ const PasswordReset = () => {
     setLoading(false);
   };
   return (
-    <div>
-      <span>Reset Password</span>
-      <form onSubmit={handleSubmit}>
-        <input type="email" required ref={emailRef} />
-        {msg && <div>{msg}</div>}
+    <>
+      <h1 className="heading">Reset Password</h1>
+      <form onSubmit={handleSubmit} className="form">
+        <input type="email" required ref={emailRef} className="input" />
+        {msg && <div className="msg">{msg}</div>}
         {msg ? handleSuccessMessage() : null}
-        <button disabled={loading}>Send reset Link</button>
+        <button disabled={loading} className="submitButton">
+          Send reset Link
+        </button>
       </form>
-      <div>
-        back to Login? <Link to={"/signin"}>Login</Link>
+      <div className="extra">
+        Back to Login?{" "}
+        <Link to={"/signin"} className="extra">
+          Login
+        </Link>
       </div>
-    </div>
+    </>
   );
 };
 
