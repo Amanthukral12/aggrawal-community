@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import supabase from "../../supabaseClient";
 import { UseProfile } from "../../contexts/ProfileContext";
 import PostItem from "./PostItem";
-
+import "./styles.css";
 const Posts = () => {
   const [posts, setPosts] = useState(null);
   const [title, setTitle] = useState("");
@@ -17,7 +17,10 @@ const Posts = () => {
   const { currentProfile } = UseProfile();
 
   const fetchPosts = async () => {
-    const { data, error } = await supabase.from("posts").select("*");
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.log(error);
@@ -25,7 +28,6 @@ const Posts = () => {
       setPosts([]);
     }
     if (data) {
-      console.log(data);
       setPosts(data);
       setFetchError(null);
     }
@@ -60,7 +62,7 @@ const Posts = () => {
           title,
           content,
           fileURLs: downloadUrls,
-          posted_by: currentProfile.first_name + currentProfile.last_name,
+          posted_by: currentProfile.first_name + " " + currentProfile.last_name,
           userID: currentProfile.id,
         },
       ])
@@ -79,18 +81,20 @@ const Posts = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="postsForm" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Title"
           value={title}
+          className="input"
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           placeholder="Content"
           value={content}
           cols="30"
-          rows="10"
+          rows="5"
+          className="textarea"
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <input
@@ -98,17 +102,17 @@ const Posts = () => {
           multiple
           onChange={(e) => {
             const selectedFiles = e.target.files;
-
             setFileUpload(Object.values(selectedFiles));
           }}
+          className="fileInput"
         />
-        <button> Upload Image</button>
+        <button className="submitButton"> Upload Image</button>
         {formError && <p>{formError}</p>}
       </form>
       {fetchError && <p>{fetchError}</p>}
 
       {posts && (
-        <div>
+        <div className="postDetailsRoot">
           {posts.map((post) => (
             <PostItem key={post.id} post={post} fetchPosts={fetchPosts} />
           ))}

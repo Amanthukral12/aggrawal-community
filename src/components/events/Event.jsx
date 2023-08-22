@@ -7,7 +7,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidTime } from "react-icons/bi";
 import { db } from "../../firebase";
 import { ref, deleteObject } from "firebase/storage";
-ref;
+
 const Event = ({ event, fetchEvents }) => {
   const { currentProfile } = UseProfile();
   const deleteEvent = async (id) => {
