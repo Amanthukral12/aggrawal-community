@@ -21,7 +21,7 @@ const PasswordReset = () => {
       const { data, error } = await supabase.auth.resetPasswordForEmail(
         emailRef.current.value,
         {
-          redirectTo: "http://localhost:5173/update-password",
+          redirectTo: "https://aggrawal-community.netlify.app/update-password",
         }
       );
       setMsg("Password reset has been sent to you email");
