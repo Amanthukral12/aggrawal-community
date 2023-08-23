@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "../sidebar/Sidebar";
 const Navbar = () => {
-  const { auth, logout } = UserAuth();
+  const { session, logout } = UserAuth();
   const { currentProfile } = UseProfile();
   const [showModal, setShowModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <div className="navMain">
-      {auth && (
+      {session && (
         <GiHamburgerMenu
           className="icon"
           onClick={() => setShowSidebar(!showSidebar)}
@@ -35,7 +35,7 @@ const Navbar = () => {
         <hr className="horizontalLine" />
       </Sidebar>
 
-      {auth ? (
+      {session ? (
         <>
           <Link to={"/"} className="navHeading">
             Aggrawal Community
