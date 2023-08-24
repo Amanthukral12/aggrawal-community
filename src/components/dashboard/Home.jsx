@@ -1,10 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import { HiUserGroup } from "react-icons/hi";
 import { BsCalendarEventFill } from "react-icons/bs";
 import { GiBigDiamondRing } from "react-icons/gi";
+import { UseProfile } from "../../contexts/ProfileContext";
+import { useEffect } from "react";
 
 const Home = () => {
+  const { currentProfile } = UseProfile();
+  const navigate = useNavigate();
+
+  const {
+    first_name,
+    last_name,
+    phone_number,
+    age,
+    gender,
+    profile_photo,
+    address,
+  } = currentProfile;
+
+  useEffect(() => {
+    if (
+      first_name === "" ||
+      last_name === "" ||
+      phone_number === "" ||
+      age === "" ||
+      gender === "" ||
+      profile_photo === "" ||
+      address === ""
+    ) {
+      navigate("/update-profile");
+    }
+  }, []);
+
   return (
     <div className="mainDiv">
       <Link to={"/members"} className="section">
