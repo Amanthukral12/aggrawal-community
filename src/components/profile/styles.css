@@ -1,0 +1,41 @@
+.profileForm {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #283F4D;
+    padding: 1rem;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: #283F4D;
+    padding-left: 10px;
+    padding-right: 10px;
+    word-wrap: break-word;
+}
+
+.userProfilePhoto {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+   
+}
+
+.userDetails {
+    color: white;
+    text-transform: capitalize;
+    margin-bottom: 2px;
+}
