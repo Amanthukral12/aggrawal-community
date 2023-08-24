@@ -21,6 +21,8 @@
     height: 25vh;
     background-color: #283F4D;
     width: 80%;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 15px;
     color: white;
     margin: 1rem 0 1rem 0;

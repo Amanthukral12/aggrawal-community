@@ -31,6 +31,7 @@ a.notSelected {
     display: flex;
     justify-content: center;
     line-height: 2rem;
+    text-decoration: none;
 }
 
 a.active {
@@ -43,4 +44,5 @@ a.active {
     justify-content: center;
     line-height: 2rem;
     font-weight: 700;
+    text-decoration: none;
 }

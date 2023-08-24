@@ -5,7 +5,13 @@ const Member = ({ member }) => {
   return (
     <Fade bottom>
       <div className="userSection">
-        <img src={member.profile_photo} className="profilePhoto" alt="" />
+        {member.profile_photo && (
+          <img
+            src={member.profile_photo}
+            className="profilePhoto"
+            alt="User Photo"
+          />
+        )}
         <h4 className="userName">
           {member.first_name} {member.last_name}
         </h4>

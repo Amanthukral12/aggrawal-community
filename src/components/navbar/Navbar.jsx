@@ -43,7 +43,7 @@ const Navbar = () => {
           <img
             src={currentProfile.profile_photo}
             className="profilePicture"
-            alt=""
+            alt="User Photo"
             onClick={() => setShowModal(!showModal)}
           />
         </>
