@@ -11,6 +11,7 @@ import MembersList from "./components/members/MembersList";
 import Navbar from "./components/navbar/Navbar";
 import Posts from "./components/posts/Posts";
 import Events from "./components/events/Events";
+import ProtectedRoute2 from "./components/ProtectedRoute2";
 
 function App() {
   return (
@@ -24,8 +25,11 @@ function App() {
           <Route path="/posts" element={<Posts />} />
           <Route path="/events" element={<Events />} />
         </Route>
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<ProtectedRoute2 />}>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/update-password" element={<UpdatePassword />} />
       </Routes>

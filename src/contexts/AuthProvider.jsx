@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(async (e, _session) => {
-      if (e === "SIGNED_IN") {
+      if (e == "SIGNED_IN") {
         setAuth(true);
         setSession(_session);
         setUser(_session.user);
@@ -58,6 +58,10 @@ const AuthProvider = ({ children }) => {
         setSession(null);
         setAuth(false);
         setUser(null);
+      } else if (e == "INITIAL_SESSION") {
+        setAuth(true);
+        setSession(_session);
+        setUser(_session.user);
       }
     });
 
