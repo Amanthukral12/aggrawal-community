@@ -6,3 +6,7 @@
 body {
     background-color: #132D3D;
 }
+
+img{
+    pointer-events: none;
+}
