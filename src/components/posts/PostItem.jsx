@@ -63,7 +63,7 @@ const PostItem = ({ post, fetchPosts }) => {
         <Slider {...settings}>
           {post.fileURLs &&
             post.fileURLs.map((url, index) => (
-              <img src={url} key={index} alt="" />
+              <img className="postImage" src={url} key={index} alt="" />
             ))}
         </Slider>
       </section>

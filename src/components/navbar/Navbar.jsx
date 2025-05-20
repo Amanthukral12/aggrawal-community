@@ -31,14 +31,14 @@ const Navbar = () => {
         />
       )}
       <Sidebar shown={showSidebar} close={() => setShowSidebar(!showSidebar)}>
-        <h3 className="appName">Aggrawal Community</h3>
+        <h3 className="appName">Sri Aggarwal Sewa Samiti</h3>
         <hr className="horizontalLine" />
       </Sidebar>
 
       {session ? (
         <>
           <Link to={"/"} className="navHeading">
-            Aggrawal Community
+            Sri Aggarwal Sewa Samiti
           </Link>
           <img
             src={currentProfile.profile_photo}
@@ -48,7 +48,7 @@ const Navbar = () => {
           />
         </>
       ) : (
-        <h1 className="navHeading1">Aggrawal Community</h1>
+        <h1 className="navHeading1">Sri Aggarwal Sewa Samiti</h1>
       )}
       <Modal
         shown={showModal}

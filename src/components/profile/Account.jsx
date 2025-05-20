@@ -159,6 +159,7 @@ const Account = () => {
           onChange={(e) => setGender(e.target.value)}
           value={gender}
           className="input"
+          defaultValue="Male"
         >
           <option value="Male">Male</option>
           <option value="Female">Female</option>

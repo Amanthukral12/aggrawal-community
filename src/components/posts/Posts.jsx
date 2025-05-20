@@ -16,6 +16,13 @@ const Posts = () => {
 
   const { currentProfile } = UseProfile();
 
+  const handleErrorMessage = () => {
+    setTimeout(function () {
+      setFormError("");
+      setFetchError("");
+    }, 3000);
+  };
+
   const fetchPosts = async () => {
     const { data, error } = await supabase
       .from("posts")
@@ -107,9 +114,11 @@ const Posts = () => {
           className="fileInput"
         />
         <button className="submitButton"> Upload Image</button>
-        {formError && <p>{formError}</p>}
+        {formError && <p className="msg">{formError}</p>}
+        {formError ? handleErrorMessage() : null}
       </form>
-      {fetchError && <p>{fetchError}</p>}
+      {fetchError && <p className="msg">{fetchError}</p>}
+      {fetchError ? handleErrorMessage() : null}
 
       {posts && (
         <div className="postDetailsRoot">
